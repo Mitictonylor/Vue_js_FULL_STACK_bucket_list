@@ -22,12 +22,8 @@ export default {
   },
   methods: {
     countrySelected(){
-      const newCountry = {
-        name: this.selectedCountry.name,
-        flag: this.selectedCountry.flag,
-        visited: false
-      }
-      eventBus.$emit('country-selected', newCountry)
+
+      eventBus.$emit('country-selected', this.selectedCountry)
     }
   }
 }

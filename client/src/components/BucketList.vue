@@ -19,8 +19,6 @@ export default {
   methods: {
     updateList(country){
       const updateCountry = {
-        name: country.name,
-        flag: country.flag,
         visited: true}
         BucketService.updateBucketList(country._id, updateCountry)
         .then((place) => eventBus.$emit('country-updated', place ))

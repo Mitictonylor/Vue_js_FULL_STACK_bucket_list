@@ -6,8 +6,8 @@
 
     <country-detail v-if="selectedCountry" :selectedCountry="selectedCountry">
     </country-detail>
-
-    <button v-if="!bucketList.includes(selectedCountry) && selectedCountry" v-on:click="addToBucketList">Add Country</button>
+<!-- if selected is true and some(check everyelement and see if the name of the single country in bucket list is equal to the one selected, if finds one it gives true) -->
+    <button v-if="selectedCountry && !bucketList.some(country => country.name ===selectedCountry.name) " v-on:click="addToBucketList">Add Country</button>
 
     <bucket-list :bucketList="bucketList"></bucket-list>
 </div>
@@ -61,7 +61,12 @@ export default {
         .then(bucketList => this.bucketList = bucketList)
       },
       addToBucketList(){
-        BucketService.addInBucketList(this.selectedCountry)
+        const newCountry = {
+          name: this.selectedCountry.name,
+          flag: this.selectedCountry.flag,
+          visited: false
+        }
+        BucketService.addInBucketList(newCountry)
         .then((country) => this.bucketList.push(country))
       }
     }
